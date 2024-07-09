@@ -7,5 +7,6 @@ public class OrderResponse {
 
 	private Long Id;
 	private Long userId;
+	private int bookId;
 	
 }

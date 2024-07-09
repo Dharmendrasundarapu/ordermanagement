@@ -8,6 +8,6 @@ import com.amzur.order_management.dto.response.OrderResponse;
 public interface OrderService {
 	
 	public OrderResponse save(OrderRequest orderRequest);
-   public OrderResponse getById(Long Id);
+   public List<OrderResponse> getByUserId(Long userId);
 
 }

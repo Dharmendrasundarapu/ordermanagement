@@ -26,9 +26,11 @@ public class OrderServiceImpl implements OrderService{
 	public OrderResponse save(OrderRequest orderRequest) {
 		
 		OrderEntity orderEntity = new OrderEntity();
+		LineItemEntity lineItemEntity = new LineItemEntity();
+
 		orderEntity.setUserId(orderRequest.getUserId());
 		BeanUtils.copyProperties(orderRequest, orderEntity);
-
+	//	BeanUtils.copyProperties(orderRequest, lineItemEntity);
 		orderEntity = orderRepository.save(orderEntity);
 		final Long orderId = orderEntity.getId();
 		List<LineItemEntity> lineItems = orderRequest.getBookIds().stream()
@@ -48,13 +50,24 @@ public class OrderServiceImpl implements OrderService{
 	}
 
 	@Override
-	public OrderResponse getById(Long Id) {
-		Optional<OrderEntity> orderEntity= orderRepository.findById(Id);
+	public List<OrderResponse> getByUserId(Long userId) {
+		return orderRepository.findByUserId(userId).stream().map(this::convertEntitytoResponse).collect(Collectors.toList());
+		
+	}
+	public List<OrderResponse> getByOrderId(Long orderId){
+		return lineItemRepository.findByOrderId(orderId).stream().map(this::convertEntitytoResponses).collect(Collectors.toList());
+	}
+
+	public OrderResponse convertEntitytoResponse(OrderEntity orderEntity) {
 		OrderResponse orderResponse=new OrderResponse();
 		BeanUtils.copyProperties(orderEntity, orderResponse);
 		return orderResponse;
 	}
-
+	public OrderResponse convertEntitytoResponses(LineItemEntity lineItemEntity) {
+		OrderResponse orderResponse=new OrderResponse();
+		BeanUtils.copyProperties(lineItemEntity, orderResponse);
+		return orderResponse;
+	}
 	
 	
 

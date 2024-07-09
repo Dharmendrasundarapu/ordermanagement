@@ -1,5 +1,6 @@
 package com.amzur.order_management.repository;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -15,5 +16,5 @@ import com.amzur.order_management.entities.OrderEntity;
 @Repository
 public interface OrderRepository extends JpaRepository<OrderEntity, Long>{
 
-	public Optional<OrderEntity> findById(Long Id);
+	public List<OrderEntity> findByUserId(Long userId);
 }
