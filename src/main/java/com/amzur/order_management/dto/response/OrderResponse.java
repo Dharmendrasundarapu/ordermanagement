@@ -5,7 +5,7 @@ import lombok.Data;
 @Data
 public class OrderResponse {
 
-	private Long Id;
+	private Long orderId;
 	private Long userId;
 	private int bookId;
 	

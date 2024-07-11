@@ -13,14 +13,16 @@ import jakarta.persistence.Table;
 public class OrderEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long id;
+    @Column(name="ORDER_ID")
+    private Long orderId;
     @Column(name = "USER_ID")
     private Long userId;
-	public Long getId() {
-		return id;
+	
+	public Long getOrderId() {
+		return orderId;
 	}
-	public void setId(Long id) {
-		this.id = id;
+	public void setOrderId(Long orderId) {
+		this.orderId = orderId;
 	}
 	public Long getUserId() {
 		return userId;
