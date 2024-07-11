@@ -26,13 +26,11 @@ public class OrderServiceImpl implements OrderService{
 	public OrderResponse save(OrderRequest orderRequest) {
 		
 		OrderEntity orderEntity = new OrderEntity();
-		LineItemEntity lineItemEntity = new LineItemEntity();
-
 		orderEntity.setUserId(orderRequest.getUserId());
 		BeanUtils.copyProperties(orderRequest, orderEntity);
 	//	BeanUtils.copyProperties(orderRequest, lineItemEntity);
 		orderEntity = orderRepository.save(orderEntity);
-		final Long orderId = orderEntity.getId();
+		final Long orderId = orderEntity.getOrderId();
 		List<LineItemEntity> lineItems = orderRequest.getBookIds().stream()
 		    .map(bookId -> {
 		        LineItemEntity lineItem = new LineItemEntity();
